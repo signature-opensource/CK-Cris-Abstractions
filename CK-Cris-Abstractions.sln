@@ -1,25 +1,26 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36221.1 d17.14
+VisualStudioVersion = 17.14.36221.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CK.Cris", "CK.Cris/CK.Cris.csproj", "{B73A59E7-B811-B66A-986E-4BD5243336F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CK.Cris", "CK.Cris\CK.Cris.csproj", "{B73A59E7-B811-B66A-986E-4BD5243336F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CK.IO.Auth", "CK.IO.Auth/CK.IO.Auth.csproj", "{333D9B4D-B0E3-F407-E096-8F328DC215FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CK.IO.Auth", "CK.IO.Auth\CK.IO.Auth.csproj", "{333D9B4D-B0E3-F407-E096-8F328DC215FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CK.IO.Auth.Basic", "CK.IO.Auth.Basic/CK.IO.Auth.Basic.csproj", "{BCDD97DC-595D-A152-0A8D-D306B732CD11}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CK.IO.Auth.Basic", "CK.IO.Auth.Basic\CK.IO.Auth.Basic.csproj", "{BCDD97DC-595D-A152-0A8D-D306B732CD11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CK.IO.DelayedCommand", "CK.IO.DelayedCommand/CK.IO.DelayedCommand.csproj", "{C99B9AC2-5E70-C100-213C-E4E15CFC9D4E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CK.IO.DelayedCommand", "CK.IO.DelayedCommand\CK.IO.DelayedCommand.csproj", "{C99B9AC2-5E70-C100-213C-E4E15CFC9D4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeCakeBuilder", "CodeCakeBuilder/CodeCakeBuilder.csproj", "{484E57FF-04CA-282B-DF8A-95F0C8587F63}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeCakeBuilder", "CodeCakeBuilder\CodeCakeBuilder.csproj", "{484E57FF-04CA-282B-DF8A-95F0C8587F63}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{17cc6295-94ce-49ee-89b7-f4fc9c78f9ed}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{17CC6295-94CE-49EE-89B7-F4FC9C78F9ED}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
 		NuGet.config = NuGet.config
 		RepositoryInfo.xml = RepositoryInfo.xml
-		appveyor.yml = appveyor.yml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CK.IO.Actor", "CK.IO.Actor\CK.IO.Actor.csproj", "{ABB60904-347A-2A1D-CCA5-7F7FE1FC4051}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +48,10 @@ Global
 		{484E57FF-04CA-282B-DF8A-95F0C8587F63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{484E57FF-04CA-282B-DF8A-95F0C8587F63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{484E57FF-04CA-282B-DF8A-95F0C8587F63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABB60904-347A-2A1D-CCA5-7F7FE1FC4051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABB60904-347A-2A1D-CCA5-7F7FE1FC4051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABB60904-347A-2A1D-CCA5-7F7FE1FC4051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABB60904-347A-2A1D-CCA5-7F7FE1FC4051}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
