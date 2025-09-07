@@ -1,3 +1,3 @@
 
 [assembly: CK.Setup.RequiredEngine( "CK.Cris.Engine" )]
-[assembly: CK.Core.PreserveAssemblyReference( typeof( CK.Core.NormalizedCultureInfo ) )]
+[assembly: CK.Setup.PreserveAssemblyReference( typeof( CK.Core.NormalizedCultureInfo ) )]
