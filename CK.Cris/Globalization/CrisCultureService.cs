@@ -18,7 +18,7 @@ public class CrisCultureService : IAutoService
     public void CheckCultureName( UserMessageCollector validator, ICurrentCulturePart part )
     {
         var n = part.CurrentCultureName;
-        if( string.IsNullOrEmpty( n ) || ExtendedCultureInfo.FindExtendedCultureInfo( n ) == null )
+        if( string.IsNullOrEmpty( n ) || ExtendedCultureInfo.All.FindExtendedCultureInfo( n ) == null )
         {
             validator.Warn( n == null
                                 ? "Culture name is null. It will be ignored."
@@ -28,7 +28,7 @@ public class CrisCultureService : IAutoService
 
     /// <summary>
     /// Overrides the <see cref="CurrentCultureInfo"/> with the <see cref="ICurrentCulturePart.CurrentCultureName"/>
-    /// if it not empty and locally defined (see <see cref="ExtendedCultureInfo.FindExtendedCultureInfo(string)"/>).
+    /// if it not empty and locally defined (see <see cref="ExtendedCultureInfo.All"/> and <see cref="AllCultureSnapshot.FindExtendedCultureInfo(string)"/>).
     /// </summary>
     /// <param name="part">The part.</param>
     /// <param name="ambientServices">The ambient service to configure.</param>
@@ -39,7 +39,7 @@ public class CrisCultureService : IAutoService
         var n = part.CurrentCultureName;
         if( !string.IsNullOrWhiteSpace( n ) )
         {
-            var c = ExtendedCultureInfo.FindExtendedCultureInfo( n );
+            var c = ExtendedCultureInfo.All.FindExtendedCultureInfo( n );
             if( c != null )
             {
                 ambientServices.Override( c );
