@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <!-- Always generate the xml documentation for tests in release or debug to generate the same IPoco comments. -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="CK.Globalization" Version="4.0.0" />
+    <PackageReference Include="CK.StObj.Model" Version="31.0.0" />
+  </ItemGroup>
+</Project>
