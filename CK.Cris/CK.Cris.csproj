@@ -5,7 +5,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CK.Globalization" Version="4.0.2--0003-develop" />
-    <PackageReference Include="CK.StObj.Model" Version="31.0.2--0002-develop" />
+    <PackageReference Include="CK.Globalization" Version="4.0.2--0004-develop" />
+    <PackageReference Include="CK.StObj.Model" Version="31.0.2--0004-develop" />
   </ItemGroup>
 </Project>
