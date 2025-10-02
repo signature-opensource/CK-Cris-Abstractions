@@ -9,7 +9,7 @@ public interface ISetUserNameCommand : ICommand<ISetUserNameCommandResult>, ICom
     public string UserName { get; set; }
 }
 
-public interface ISetUserNameCommandResult : ICrisBasicCommandResult
+public interface ISetUserNameCommandResult : IStandardResultPart
 {
     public string UserName { get; set; }
 }

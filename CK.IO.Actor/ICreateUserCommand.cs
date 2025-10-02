@@ -8,7 +8,7 @@ public interface ICreateUserCommand : ICommand<ICreateUserCommandResult>, IComma
     public string UserName { get; set; }
 }
 
-public interface ICreateUserCommandResult : ICrisBasicCommandResult
+public interface ICreateUserCommandResult : IStandardResultPart
 {
     public int UserIdResult { get; set; }
     public string UserName { get; set; }
