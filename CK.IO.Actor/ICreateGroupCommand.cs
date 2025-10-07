@@ -7,7 +7,7 @@ public interface ICreateGroupCommand : ICommand<ICreateGroupCommandResult>, ICom
 {
 }
 
-public interface ICreateGroupCommandResult : ICrisBasicCommandResult
+public interface ICreateGroupCommandResult : IStandardResultPart
 {
     public int GroupIdResult { get; set; }
 }
