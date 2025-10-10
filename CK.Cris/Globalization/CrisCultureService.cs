@@ -59,5 +59,4 @@ public class CrisCultureService : IAutoService
     {
         values.CurrentCultureName = currentCulture.Name;
     }
-
 }
