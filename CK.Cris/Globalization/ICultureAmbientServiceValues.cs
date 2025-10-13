@@ -10,6 +10,5 @@ public interface ICultureAmbientValues : IAmbientValues
     /// <summary>
     /// Gets or sets the current culture name.
     /// </summary>
-    [AmbientServiceValue]
     string CurrentCultureName { get; set; }
 }

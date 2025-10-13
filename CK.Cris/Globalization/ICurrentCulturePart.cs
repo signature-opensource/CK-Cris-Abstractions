@@ -12,5 +12,6 @@ public interface ICurrentCulturePart : ICrisPocoPart
     /// an event or a command. When null, the currently available <see cref="CurrentCultureInfo"/> is
     /// not changed.
     /// </summary>
+    [AmbientServiceValue]
     string? CurrentCultureName { get; set; }
 }
