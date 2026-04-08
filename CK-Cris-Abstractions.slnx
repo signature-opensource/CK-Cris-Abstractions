@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+    <File Path="appveyor.yml" />
+    <File Path="NuGet.config" />
+  </Folder>
+  <Project Path="CK.Cris/CK.Cris.csproj" />
+  <Project Path="CK.IO.Actor/CK.IO.Actor.csproj" />
+  <Project Path="CK.IO.Auth.Basic/CK.IO.Auth.Basic.csproj" />
+  <Project Path="CK.IO.Auth/CK.IO.Auth.csproj" />
+  <Project Path="CK.IO.DelayedCommand/CK.IO.DelayedCommand.csproj" />
+</Solution>
