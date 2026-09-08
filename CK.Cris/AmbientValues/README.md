@@ -1,7 +1,7 @@
 # AmbientService values
 
 "Ambient Service values" is a simple and basic mechanism to manage any information that must
-automatically and transparently flow accross commands and events. They are properties of
+automatically and transparently flow across commands and events. They are properties of
 command or events (usually of basic types like `int` or `string`).
 
 One of the key aspect of Cris (and more generally to any Command pattern) is that the command
@@ -30,7 +30,7 @@ public interface ICrisCultureAware : ICrisPart
 }
 ```
 
-Note that secured doesn't mean hidden or crypted (they could be but this is rather useless). Secured values are
+Note that secured doesn't mean hidden or encrypted (they could be but this is rather useless). Secured values are
 exposed, they just cannot be "injected" thanks to their validation.
 
 ## Secured AmbientService Values: where do they come from?
@@ -47,11 +47,11 @@ develop _ad hoc_ solutions to different contexts. For instance the `ActorId`:
 These examples shows that the binding to the "trusted" `ActorId` cannot be implemented once for all: it depends
 on the endpoint that receives the command or the event (and the party that interacts with the endpoint).
 
-To accomodate all these scenario, we introduce an indierection: the Ambient service `IAuthenticationInfo`.
-This service is the source of thruth for any authentication related values. Ambient services are ubiquitous
+To accommodate all these scenario, we introduce an indirection: the Ambient service `IAuthenticationInfo`.
+This service is the source of truth for any authentication related values. Ambient services are ubiquitous
 services that MUST be resolved by Endpoint DI container.
 
-A classical .NET Web API can use any middlewares, authentication services that relies on cookies, bearer token
+A classical .NET Web API can use any middleware, authentication services that relies on cookies, bearer token
 or anything else to be able to resolve an instance of the `IAuthenticationInfo` that captures the logged in user
 of a request.
 
@@ -82,7 +82,7 @@ Just like the authentication the culture used to handle a command:
   - not every command require authentication (a `LoginCommand` is by design non authenticated),
     or use another identity than our `IAuthenticationInfo`/`ActorId`.
   - not every command require a culture to be handled.
-- If the command gives bith to events and/or other commands and these need authentication or culture
+- If the command gives birth to events and/or other commands and these need authentication or culture
   then we must be able to provide the original ones or sensible default values if the original command
   didn't have them.
 
@@ -91,7 +91,7 @@ the `NormalizedCultureInfo.CodeDefault` (whereas the `IAuthenticationInfo` defau
 
 The culture is not _validated_ against the Ambient service to which it is bound, instead it _configures_ it.
 
-Nothing prevents the `CultureName` to also be validated (to be syntaxically valid for instance) and this is
+Nothing prevents the `CultureName` to also be validated (to be syntactically valid for instance) and this is
 exactly what does the `CrisCultureService` to warn the caller that its culture is not a known culture (the
 default culture will be used).
 
