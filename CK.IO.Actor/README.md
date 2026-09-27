@@ -30,9 +30,9 @@ public interface ICreateUserCommandResult : IStandardResultPart
 | [`IGetUserProfileQCommand`](IGetUserProfileQCommand.cs) | [`IUserProfile?`](IUserProfile.cs) | `UserId` |
 | [`ICreateGroupCommand`](ICreateGroupCommand.cs) | `ICreateGroupCommandResult` - the new id | none |
 | [`IDestroyGroupCommand`](IDestroyGroupCommand.cs) | `ICrisBasicCommandResult` | `GroupId`, `ForceDestroy` |
-| [`IAddUserToGroupCommand`](IAddUserToGroupCommand.cs) | `ICrisBasicCommandResult` | `GroupId`, `UserId` |
-| [`IRemoveUserFromGroupCommand`](IRemoveUserFromGroupCommand.cs) | `ICrisBasicCommandResult` | `GroupId`, `UserId` |
-| [`IClearUserGroupsCommand`](IClearUserGroupsCommand.cs) | `ICrisBasicCommandResult` | `UserId` |
+| [`IAddMemberToGroupCommand`](IAddMemberToGroupCommand.cs) | `ICrisBasicCommandResult` | `GroupId`, `MemberId` |
+| [`IRemoveMemberFromGroupCommand`](IRemoveMemberFromGroupCommand.cs) | `ICrisBasicCommandResult` | `GroupId`, `MemberId` |
+| [`IClearMemberGroupsCommand`](IClearMemberGroupsCommand.cs) | `ICrisBasicCommandResult` | `MemberId` |
 | [`IRemoveAllUsersFromGroupCommand`](IRemoveAllUsersFromGroupCommand.cs) | `ICrisBasicCommandResult` | `GroupId` |
 
 Four result shapes, and the choice is not arbitrary. Six commands have nothing to report but success

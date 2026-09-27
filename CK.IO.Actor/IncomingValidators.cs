@@ -39,9 +39,9 @@ public class IncomingValidators : IRealObject
     }
 
     [IncomingValidator]
-    public virtual void ValidateClearUserGroupsCommand( IClearUserGroupsCommand cmd, UserMessageCollector collector )
+    public virtual void ValidateClearUserGroupsCommand( IClearMemberGroupsCommand cmd, UserMessageCollector collector )
     {
-        if( cmd.UserId <= 0 )
+        if( cmd.MemberId <= 0 )
         {
             collector.Error( "UserId must be greater than 0.", "User.InvalidUserId" );
         }
@@ -59,11 +59,11 @@ public class IncomingValidators : IRealObject
 
     #region Groups validators
     [IncomingValidator]
-    public virtual void ValidateAddUserToGroupCommand( IAddUserToGroupCommand cmd, UserMessageCollector collector )
+    public virtual void ValidateAddMemberToGroupCommand( IAddMemberToGroupCommand cmd, UserMessageCollector collector )
     {
-        if( cmd.UserId <= 0 )
+        if( cmd.MemberId <= 0 )
         {
-            collector.Error( "UserId must be greater than 0.", "User.InvalidUserId" );
+            collector.Error( "MemberId must be greater than 0.", "Member.InvalidMemberId" );
         }
         if( cmd.GroupId <= 0 )
         {
@@ -72,11 +72,11 @@ public class IncomingValidators : IRealObject
     }
 
     [IncomingValidator]
-    public virtual void ValidateRemoveUserFromGroupCommand( IRemoveUserFromGroupCommand cmd, UserMessageCollector collector )
+    public virtual void ValidateRemoveMemberFromGroupCommand( IRemoveMemberFromGroupCommand cmd, UserMessageCollector collector )
     {
-        if( cmd.UserId <= 0 )
+        if( cmd.MemberId <= 0 )
         {
-            collector.Error( "UserId must be greater than 0.", "User.InvalidUserId" );
+            collector.Error( "MemberId must be greater than 0.", "Member.InvalidMemberId" );
         }
         if( cmd.GroupId <= 0 )
         {
@@ -94,7 +94,7 @@ public class IncomingValidators : IRealObject
     }
 
     [IncomingValidator]
-    public virtual void ValidateRemoveAllUsersFromGroupCommand( IRemoveAllUsersFromGroupCommand cmd, UserMessageCollector collector )
+    public virtual void ValidateRemoveAllMembersFromGroupCommand( IRemoveAllMembersFromGroupCommand cmd, UserMessageCollector collector )
     {
         if( cmd.GroupId <= 0 )
         {
