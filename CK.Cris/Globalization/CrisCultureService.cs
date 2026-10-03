@@ -11,13 +11,24 @@ public class CrisCultureService : IAutoService
     /// <summary>
     /// Validates that the <see cref="ICurrentCulturePart.CurrentCultureName"/> is not empty
     /// and defined locally. If not, warnings are emitted. 
+    /// A null name is set to <see cref="string.Empty"/> (the current culture is not changed).
     /// </summary>
+    /// <remarks>
+    /// The name is never left null because <see cref="AmbientServiceValueAttribute"/> is a <see cref="INullInvalidAttribute"/>:
+    /// a caller that doesn't care about the culture must not see its command rejected.
+    /// </remarks>
+    /// <param name="monitor">The monitor to use.</param>
     /// <param name="validator">The message collector.</param>
     /// <param name="part">The part to validate.</param>
     [IncomingValidator]
-    public void CheckCultureName( UserMessageCollector validator, ICurrentCulturePart part )
+    public void CheckCultureName( IActivityMonitor monitor, UserMessageCollector validator, ICurrentCulturePart part )
     {
         var n = part.CurrentCultureName;
+        if( n == null )
+        {
+            monitor.Warn( $"Culture name is null on '{part.CrisPocoModel.PocoName}'. Setting it to string.Empty." );
+            part.CurrentCultureName = string.Empty;
+        }
         if( string.IsNullOrEmpty( n ) || ExtendedCultureInfo.All.FindExtendedCultureInfo( n ) == null )
         {
             validator.Warn( n == null
