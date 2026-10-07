@@ -4,8 +4,8 @@ namespace CK.Auth;
 
 
 /// <summary>
-/// Extends <see cref="ICommandAuthUnsafe"/> to ensure that the authentication level is <see cref="AuthLevel.Normal"/>
-/// (or <see cref="AuthLevel.Critical"/>).
+/// Extends <see cref="ICommandAuthUnsafe"/> to ensure that the authentication level is <c>Normal</c>
+/// (or <c>Critical</c>).
 /// </summary>
 [CKTypeDefiner]
 public interface ICommandAuthNormal : ICommandAuthUnsafe, IAuthNormalPart

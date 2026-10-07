@@ -8,23 +8,23 @@ namespace CK.Auth;
 
 /// <summary>
 /// Defines the authentication properties that are ambient values (coming
-/// from <see cref="IAuthenticationInfo"/> ambient service): command properties
+/// from the authentication ambient service): command properties
 /// with these names are automatically configured.
 /// </summary>
 public interface IAuthAmbientValues : IAmbientValues
 {
     /// <summary>
-    /// Gets or sets the <see cref="IAuthenticationInfo.User"/> identifier.
+    /// Gets or sets the current user identifier.
     /// </summary>
     int ActorId { get; set; }
 
     /// <summary>
-    /// Gets or sets the <see cref="IAuthenticationInfo.ActualUser"/> identifier.
+    /// Gets or sets the current actual user identifier (the one that impersonates the user, if any).
     /// </summary>
     int ActualActorId { get; set; }
 
     /// <summary>
-    /// Gets or sets the <see cref="IAuthenticationInfo.DeviceId"/> identifier.
+    /// Gets or sets the current device identifier.
     /// </summary>
     string DeviceId { get; set; }
 

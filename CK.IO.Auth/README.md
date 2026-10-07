@@ -23,9 +23,9 @@ one each.
 
 | Part | What a handler may assume |
 |------|---------------------------|
-| [`IAuthUnsafePart`](IAuthUnsafePart.cs) | `ActorId` is the current `IAuthenticationInfo.UnsafeUser` - and nothing more |
-| [`IAuthNormalPart`](IAuthNormalPart.cs) | the level is `AuthLevel.Normal` or `Critical` |
-| [`IAuthCriticalPart`](IAuthCriticalPart.cs) | the level is `AuthLevel.Critical` |
+| [`IAuthUnsafePart`](IAuthUnsafePart.cs) | `ActorId` is the current authenticated user, whatever its level - and nothing more |
+| [`IAuthNormalPart`](IAuthNormalPart.cs) | the level is `Normal` or `Critical` |
+| [`IAuthCriticalPart`](IAuthCriticalPart.cs) | the level is `Critical` |
 | [`IAuthDeviceIdPart`](IAuthDeviceIdPart.cs) | adds `DeviceId` |
 | [`IAuthImpersonationPart`](IAuthImpersonationPart.cs) | adds `ActualActorId` - who is really connected |
 
@@ -60,7 +60,15 @@ level added to this ladder needs it too.
 Nothing in this package checks anything. There is no validator, no service, no executable code at all -
 eleven interfaces and six properties. The guarantee behind `Normal` or `Critical` is produced by an
 `[IncomingValidator]` living wherever the command is received, comparing the command's `ActorId`
-against the ambient `IAuthenticationInfo` and refusing the mismatch.
+against the ambient authentication and refusing the mismatch.
+
+This package doesn't even reference an authentication model: two stacks implement these parts, and an
+application uses exactly one of them.
+
+| Stack | Ambient authentication | Validator |
+|-------|------------------------|-----------|
+| Legacy | `CK.Auth.IAuthenticationInfo` ([CK.Auth.Abstractions](https://github.com/signature-opensource/CK-Auth-Abstractions)) | `CK.Cris.Auth` |
+| Current | `CK.Core.AuthenticationInfo` (CK.AuthenticationInfo) | `CK.Cris.Authentication` |
 
 That is the whole reason the levels are parts rather than a service call: the *command* says what it
 needs, the *endpoint* knows how to prove it, and the two never reference each other. An application
@@ -89,5 +97,5 @@ accordingly. `IAmbientValues` itself is in `CK.Cris.AmbientValues`.
 ## Requires.
 
 - `CK.Cris`, for `ICommandPart`, `ICrisPocoPart`, `[AmbientServiceValue]` and `IAmbientValues`.
-- `CK.Auth.Abstractions`, for `IAuthenticationInfo` and `AuthLevel` - the types the levels refer to
-  and that a validator reads.
+
+Nothing else: the authentication model is the validator's business (see the stacks above).
