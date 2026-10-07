@@ -12,6 +12,6 @@ public interface IAuthDeviceIdPart : IAuthUnsafePart
     /// <summary>
     /// Gets or sets the device identifier.
     /// </summary>
-    [AmbientServiceValue]
+    [AmbientServiceValue( isSafe: true )]
     string? DeviceId { get; set; }
 }

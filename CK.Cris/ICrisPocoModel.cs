@@ -58,6 +58,12 @@ public interface ICrisPocoModel
     bool EndpointMustConfigureServices { get; }
 
     /// <summary>
+    /// Gets whether this command or event has at least one property marked with <see cref="SensitiveAttribute"/>.
+    /// Its content is then never logged (only its <see cref="PocoName"/> is).
+    /// </summary>
+    bool HasSensitiveData { get; }
+
+    /// <summary>
     /// Gets whether this command or event when executed in the background without a <see cref="AmbientServiceHub"/>
     /// provided by a receiving endpoint must configure the background services before being executed (at least one
     /// [RestoreAmbientService] method exists for it).

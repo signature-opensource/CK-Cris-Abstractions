@@ -12,7 +12,7 @@ assume about it.
 ```csharp
 public interface IAuthUnsafePart : ICrisPocoPart
 {
-    [AmbientServiceValue]
+    [AmbientServiceValue( isSafe: true )]
     int? ActorId { get; set; }
 }
 ```
@@ -71,9 +71,14 @@ application uses exactly one of them.
 | Current | `CK.Core.AuthenticationInfo` (CK.AuthenticationInfo) | `CK.Cris.Authentication` |
 
 That is the whole reason the levels are parts rather than a service call: the *command* says what it
-needs, the *endpoint* knows how to prove it, and the two never reference each other. An application
-that installs no such validator has commands that declare `ICommandAuthCritical` and get nothing -
-which is a deployment error, not something this package can catch.
+needs, the *endpoint* knows how to prove it, and the two never reference each other.
+
+An application that installs no such validator would have commands that declare `ICommandAuthCritical` and
+get nothing - and since handlers routinely use the `ActorId` (the database procedures take it), any caller could
+act as anybody. This is why the three properties are `[AmbientServiceValue( isSafe: true )]`: a safe ambient value
+must be checked by at least one `[IncomingValidator]`, and the setup fails for a handled command whose safe value
+nobody checks. A System that doesn't care about users (parties working together over CK.AppIdentity, for
+instance) simply doesn't handle these commands; one that does must install a validator.
 
 ## The collected values are richer than the actor identifier.
 

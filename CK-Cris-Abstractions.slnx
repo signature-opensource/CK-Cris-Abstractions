@@ -8,5 +8,6 @@
   <Project Path="CK.IO.Actor/CK.IO.Actor.csproj" />
   <Project Path="CK.IO.Auth.Basic/CK.IO.Auth.Basic.csproj" />
   <Project Path="CK.IO.Auth/CK.IO.Auth.csproj" />
+  <Project Path="CK.IO.Authentication/CK.IO.Authentication.csproj" />
   <Project Path="CK.IO.DelayedCommand/CK.IO.DelayedCommand.csproj" />
 </Solution>

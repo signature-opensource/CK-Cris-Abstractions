@@ -157,15 +157,12 @@ validator or a configurator.
   kind for a value the caller states and the receiver has an independent source of truth for: it is
   exposed, not hidden, but it cannot be injected because it is compared.
 
-Those "must" are the documented contract, not a checked one, and the gap is wider than it sounds.
 The setup-time engine pairs each `[AmbientServiceValue]` with its `IAmbientValues` twin and fails
-without it, but `IsSafe` itself is **never read anywhere** - not by the engine, not at runtime.
-
-Which shows: `[AmbientServiceValue( … )]` with an argument does not occur once in the whole stack, so
-every declared ambient value is nominally `isSafe: false`, the *configuring* kind - including the ones
-that are in fact validated against an authentication service and have no configurator at all. The
-declaration and the behaviour disagree, and nothing notices because nothing looks. Read the handlers,
-not the flag.
+without it. For `IsSafe: true` it also checks the first "must": a handled command or event with a safe
+ambient value that no `[IncomingValidator]` checks fails the setup. A value that claims to be checked
+and isn't would let any caller state it - the `ActorId` of the authentication parts is the example, and
+they are declared safe for that reason. The `IsSafe: false` rule (a configurator must exist) is not
+checked yet.
 
 [`CrisCultureService`](Globalization/CrisCultureService.cs) is the reference implementation of the
 first kind: one small service carrying a validator, a configurator and a post handler for a single
@@ -230,7 +227,24 @@ documented default is `CoreApplicationIdentity.EnvironmentName == "#Dev"`; the c
 uses `IsDevelopmentAndInitialized`, so an application whose identity is not yet initialized gets
 **false** even in a development environment. When it does end up true, every exception message reaches
 the user messages; otherwise only `MCException` ones do. The full exception is always logged, under
-an error group whose log key is returned and put in the error result.
+an error group whose log key is returned and put in the error result. The command itself is logged too,
+except when it has `[Sensitive]` properties (see below): then only its name is.
+
+[`RedirectedUrl`](RedirectedUrl.cs) is a result that is a URL to navigate to (a remote login for instance),
+with whether the navigation happens in the current window. It is data like any result: an HTTP endpoint
+answers it as JSON and the client navigates.
+
+## Some commands must never leave their endpoint, and some properties must never be logged.
+
+[`ICommandEndpointOnly`](Command/ICommandEndpointOnly.cs) is a command part: the endpoint that receives such a
+command executes it inline, in its own context. It is never moved to the background, never delayed. This is for
+commands that depend on their endpoint (an authentication session that sets the cookies of the HTTP response) or
+that must not survive their reception because they carry secrets.
+
+[`[Sensitive]`](Attributes/SensitiveAttribute.cs) marks a property that holds a secret (a password, a token).
+`ICrisPocoModel.HasSensitiveData` is true when a command or event has one: its content is never logged and it is not
+captured as the source command of the events it emits. The property is exchanged as usual - this is about not
+leaking, not about not sending.
 
 ## An event is caller-only until an attribute says otherwise.
 

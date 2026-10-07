@@ -12,6 +12,6 @@ public interface IAuthUnsafePart : ICrisPocoPart
     /// <summary>
     /// Gets or sets the actor identifier.
     /// </summary>
-    [AmbientServiceValue]
+    [AmbientServiceValue( isSafe: true )]
     int? ActorId { get; set; }
 }
