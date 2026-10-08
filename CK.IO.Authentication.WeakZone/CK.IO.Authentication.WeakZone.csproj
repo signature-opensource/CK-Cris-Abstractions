@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>CK.IO.Authentication.WeakZone</RootNamespace>
+    <Description>Extends the weak actor login command with the zone of the weak actor.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CK.IO.Authentication.Weak\CK.IO.Authentication.Weak.csproj" />
+  </ItemGroup>
+</Project>

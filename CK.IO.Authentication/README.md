@@ -13,13 +13,22 @@ client sends these commands, and only them, to the dedicated authentication endp
 
 | Command | Result | What it does |
 |---------|--------|--------------|
-| [`IPasswordLoginCommand`](IPasswordLoginCommand.cs) | `ISessionResult` | Logs in with a user name and a `[Sensitive]` password ("Basic" scheme). |
-| [`IStartLoginCommand`](IStartLoginCommand.cs) | `RedirectedUrl` | Starts a remote login: the client navigates to the URL (inline or in a popup). `ReturnUrl` is a relative path. |
-| [`IWeakLoginCommand`](IWeakLoginCommand.cs) | `ISessionResult` | Logs in a weak actor by its name: the session is at most `Unsafe`. Refused without a "Weak" login provider. |
+| [`IStartLoginCommand`](IStartLoginCommand.cs) | `RedirectedUrl` | **The generic login**, for any scheme, with no credential: the client navigates to the URL (inline or in a popup). `ReturnUrl` is a relative path. |
 | [`IRefreshSessionCommand`](IRefreshSessionCommand.cs) | `ISessionResult` | Issues a new token while the session is valid. |
 | [`ILogoutSessionCommand`](ILogoutSessionCommand.cs) | (none) | Revokes the session. |
 | [`IImpersonateCommand`](IImpersonateCommand.cs) | `ISessionResult` | `ICommandAuthCritical`. Refused unless an `IImpersonationService` allows it. Cannot target the actual user. |
 | [`IClearImpersonationCommand`](IClearImpersonationCommand.cs) | `ISessionResult` | Ends the impersonation: always possible, it can only lower the privileges. |
+
+`IStartLoginCommand` knows no scheme in particular: the authentication center resolves the scheme and decides where
+the client goes - the authorization URL of a remote provider (OpenID Connect, OAuth...), or the login page of the
+application for a direct login scheme. The **direct logins** carry the credentials of one method and each one is a
+package of its own, so that an application only has the commands of the methods it installs:
+
+| Package | Command |
+|---------|---------|
+| [CK.IO.Authentication.Basic](../CK.IO.Authentication.Basic/README.md) | `IBasicLoginCommand`: user name and a `[Sensitive]` password. |
+| [CK.IO.Authentication.Weak](../CK.IO.Authentication.Weak/README.md) | `IWeakLoginCommand`: a weak actor name, at most `Unsafe`. |
+| [CK.IO.Authentication.WeakZone](../CK.IO.Authentication.WeakZone/README.md) | Extends `IWeakLoginCommand` with the `ZoneId` of the weak actor. |
 
 A login always creates a new session that replaces the current one (and ends its impersonation). The session
 lifetimes are the policy of the authentication center: no command lets the client choose them.

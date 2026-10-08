@@ -4,7 +4,13 @@ using System.Collections.Generic;
 namespace CK.IO.Authentication;
 
 /// <summary>
-/// Starts a remote login (OpenID Connect, OAuth, etc.): the result is the URL the client must navigate to.
+/// The generic login command: it starts a login with any scheme and carries no credential. The result is the URL the
+/// client must navigate to, decided by the authentication center for the scheme: the authorization URL of a remote
+/// provider (OpenID Connect, OAuth, etc.), or the login page of the application for a direct login scheme ("Basic",
+/// "Weak", etc.) that then sends its own command (with the credentials).
+/// <para>
+/// A client can always start a login with this command, without knowing which method is behind the scheme.
+/// </para>
 /// </summary>
 public interface IStartLoginCommand : ICommand<RedirectedUrl>, ICommandAuthenticationSession
 {

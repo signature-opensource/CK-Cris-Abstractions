@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>CK.IO.Authentication.Weak</RootNamespace>
+    <Description>The weak actor login command (by name, at most Unsafe level) of the CK.AuthenticationInfo model.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CK.IO.Authentication\CK.IO.Authentication.csproj" />
+  </ItemGroup>
+</Project>

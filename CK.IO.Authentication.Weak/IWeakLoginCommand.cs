@@ -1,7 +1,7 @@
 using CK.Core;
 using CK.Cris;
 
-namespace CK.IO.Authentication;
+namespace CK.IO.Authentication.Weak;
 
 /// <summary>
 /// Logs in a weak actor with its name only: the resulting session is at most at <see cref="AuthLevel.Unsafe"/> level.
