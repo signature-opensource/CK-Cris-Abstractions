@@ -14,6 +14,7 @@ client sends these commands, and only them, to the dedicated authentication endp
 | Command | Result | What it does |
 |---------|--------|--------------|
 | [`IStartLoginCommand`](IStartLoginCommand.cs) | `RedirectedUrl` | **The generic login**, for any scheme, with no credential: the client navigates to the URL (inline or in a popup). `ReturnUrl` is a relative path. |
+| [`IRemoteLoginCallbackCommand`](IRemoteLoginCallbackCommand.cs) | `ISessionResult` | Completes a remote login: what the provider sent back (`State`, `[Sensitive]` `Code`, `Error`). Built by the endpoint's callback, never sent by a client. |
 | [`IRefreshSessionCommand`](IRefreshSessionCommand.cs) | `ISessionResult` | Issues a new token while the session is valid. |
 | [`ILogoutSessionCommand`](ILogoutSessionCommand.cs) | (none) | Revokes the session. |
 | [`IImpersonateCommand`](IImpersonateCommand.cs) | `ISessionResult` | `ICommandAuthCritical`. Refused unless an `IImpersonationService` allows it. Cannot target the actual user. |
