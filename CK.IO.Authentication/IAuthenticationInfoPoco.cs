@@ -13,14 +13,14 @@ namespace CK.IO.Authentication;
 public interface IAuthenticationInfoPoco : IPoco
 {
     /// <summary>
-    /// Gets the user (whatever its level is).
+    /// Gets the actor (whatever its level is).
     /// </summary>
-    IUserInfoPoco UnsafeUser { get; }
+    IActorInfoPoco UnsafeActor { get; }
 
     /// <summary>
-    /// Gets the actual user (whatever its level is).
+    /// Gets the actual actor (whatever its level is).
     /// </summary>
-    IUserInfoPoco UnsafeActualUser { get; }
+    IActorInfoPoco UnsafeActualActor { get; }
 
     /// <summary>
     /// Gets or sets the session expiration (Utc).
@@ -44,8 +44,8 @@ public interface IAuthenticationInfoPoco : IPoco
     void InitializeFrom( AuthenticationInfo info )
     {
         Throw.CheckNotNullArgument( info );
-        UnsafeUser.InitializeFrom( info.UnsafeUser );
-        UnsafeActualUser.InitializeFrom( info.UnsafeActualUser );
+        UnsafeActor.InitializeFrom( info.UnsafeActor );
+        UnsafeActualActor.InitializeFrom( info.UnsafeActualActor );
         Expires = info.Expires;
         CriticalExpires = info.CriticalExpires;
         DeviceId = info.DeviceId;

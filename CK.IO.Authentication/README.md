@@ -42,6 +42,6 @@ schemes so that a login interface shows only what exists.
 `[Sensitive]` bearer token and whether the session is remembered. The other session secrets (the cookies of an HTTP
 endpoint for instance) never appear in a result.
 
-[`IUserInfoPoco`](IUserInfoPoco.cs) has the `Level` of the user: the level belongs to the user, not to the session.
+[`IActorInfoPoco`](IActorInfoPoco.cs) has the `Level` of the actor: the level belongs to the actor, not to the session.
 Both Pocos are written by the server with `InitializeFrom` and are never turned back into an `AuthenticationInfo`:
 a Poco received in a command proves nothing, a trusted authentication only comes from a verified token.

@@ -4,22 +4,22 @@ using CK.Cris;
 namespace CK.IO.Authentication;
 
 /// <summary>
-/// Impersonates the actual user into another user. Exactly one of <see cref="TargetUserId"/> or
-/// <see cref="TargetUserName"/> must be set.
+/// Impersonates the actual actor into another actor. Exactly one of <see cref="TargetActorId"/> or
+/// <see cref="TargetActorName"/> must be set.
 /// <para>
 /// Any impersonation is refused unless the optional <c>CK.Core.IImpersonationService</c> allows it. Targeting the actual
-/// user is refused: use the <see cref="IClearImpersonationCommand"/>.
+/// actor is refused: use the <see cref="IClearImpersonationCommand"/>.
 /// </para>
 /// </summary>
 public interface IImpersonateCommand : ICommand<ISessionResult>, ICommandAuthenticationSession, ICommandAuthCritical
 {
     /// <summary>
-    /// Gets or sets the target user identifier.
+    /// Gets or sets the target actor identifier.
     /// </summary>
-    int? TargetUserId { get; set; }
+    int? TargetActorId { get; set; }
 
     /// <summary>
-    /// Gets or sets the target user name.
+    /// Gets or sets the target actor name.
     /// </summary>
-    string? TargetUserName { get; set; }
+    string? TargetActorName { get; set; }
 }
