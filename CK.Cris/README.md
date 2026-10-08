@@ -242,9 +242,9 @@ commands that depend on their endpoint (an authentication session that sets the 
 that must not survive their reception because they carry secrets.
 
 [`[Sensitive]`](Attributes/SensitiveAttribute.cs) marks a property that holds a secret (a password, a token).
-`ICrisPocoModel.HasSensitiveData` is true when a command or event has one: its content is never logged and it is not
-captured as the source command of the events it emits. The property is exchanged as usual - this is about not
-leaking, not about not sending.
+`ICrisPocoModel.HasSensitiveData` is true when a command or event has one: its content is never logged and emitting an
+event that captures its source command (`IEventSourceCommandPart`) fails. The property is exchanged as usual - this is
+about not leaking, not about not sending.
 
 ## An event is caller-only until an attribute says otherwise.
 

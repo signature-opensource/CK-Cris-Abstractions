@@ -6,8 +6,8 @@ namespace CK.Cris;
 /// Marks a Cris Poco property as sensitive: it holds a secret (a password, a token, etc.).
 /// <para>
 /// A command or event that has at least one sensitive property (<see cref="ICrisPocoModel.HasSensitiveData"/>)
-/// is never logged with its content (only its type name is) and is not captured as the source command of the events
-/// it emits. The property itself is exchanged as usual: this is not an exchange restriction.
+/// is never logged with its content (only its type name is) and cannot emit an event that captures its source command
+/// (<see cref="IEventSourceCommandPart"/>): this fails. The property itself is exchanged as usual: this is not an exchange restriction.
 /// </para>
 /// <para>
 /// A result type (that is not a command or an event) can also mark its secrets: the commands that return them should be
