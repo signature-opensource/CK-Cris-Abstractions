@@ -6,7 +6,7 @@ namespace CK.IO.Authentication.Basic;
 /// Logs in with a user name and a password (the "Basic" scheme).
 /// The session lifetimes are the policy of the authentication center: they cannot be chosen by the client.
 /// </summary>
-public interface IBasicLoginCommand : ICommand<ISessionResult>, ICommandAuthenticationSession
+public interface IBasicLoginCommand : ICommand<ISessionResult>, ICommandAuthenticationSession, ICommandLoginUserData
 {
     /// <summary>
     /// Gets or sets the user name.

@@ -1,5 +1,4 @@
 using CK.Cris;
-using System.Collections.Generic;
 
 namespace CK.IO.Authentication;
 
@@ -12,7 +11,7 @@ namespace CK.IO.Authentication;
 /// A client can always start a login with this command, without knowing which method is behind the scheme.
 /// </para>
 /// </summary>
-public interface IStartLoginCommand : ICommand<RedirectedUrl>, ICommandAuthenticationSession
+public interface IStartLoginCommand : ICommand<RedirectedUrl>, ICommandAuthenticationSession, ICommandLoginUserData
 {
     /// <summary>
     /// Gets or sets the login scheme ("Oidc.Azure" for instance).
@@ -36,9 +35,4 @@ public interface IStartLoginCommand : ICommand<RedirectedUrl>, ICommandAuthentic
     /// Gets or sets whether the session must be remembered.
     /// </summary>
     bool RememberMe { get; set; }
-
-    /// <summary>
-    /// Gets free key/value data that come with the login (an invitation token for instance).
-    /// </summary>
-    IDictionary<string, string> UserData { get; }
 }

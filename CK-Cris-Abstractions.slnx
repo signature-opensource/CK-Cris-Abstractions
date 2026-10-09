@@ -10,6 +10,7 @@
   <Project Path="CK.IO.Auth/CK.IO.Auth.csproj" />
   <Project Path="CK.IO.Authentication/CK.IO.Authentication.csproj" />
   <Project Path="CK.IO.Authentication.Basic/CK.IO.Authentication.Basic.csproj" />
+  <Project Path="CK.IO.Authentication.Passkey/CK.IO.Authentication.Passkey.csproj" />
   <Project Path="CK.IO.Authentication.Weak/CK.IO.Authentication.Weak.csproj" />
   <Project Path="CK.IO.Authentication.WeakZone/CK.IO.Authentication.WeakZone.csproj" />
   <Project Path="CK.IO.DelayedCommand/CK.IO.DelayedCommand.csproj" />

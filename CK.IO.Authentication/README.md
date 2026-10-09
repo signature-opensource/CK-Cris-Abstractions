@@ -30,6 +30,15 @@ package of its own, so that an application only has the commands of the methods 
 | [CK.IO.Authentication.Basic](../CK.IO.Authentication.Basic/README.md) | `IBasicLoginCommand`: user name and a `[Sensitive]` password. |
 | [CK.IO.Authentication.Weak](../CK.IO.Authentication.Weak/README.md) | `IWeakLoginCommand`: a weak actor name, at most `Unsafe`. |
 | [CK.IO.Authentication.WeakZone](../CK.IO.Authentication.WeakZone/README.md) | Extends `IWeakLoginCommand` with the `ZoneId` of the weak actor. |
+| [CK.IO.Authentication.Passkey](../CK.IO.Authentication.Passkey/README.md) | The passkey (WebAuthn) login and registration: two commands per ceremony, the browser in between. |
+
+## The login's user data
+
+[`ICommandLoginUserData`](ICommandLoginUserData.cs) is the part of the login commands (`IStartLoginCommand`, the direct
+logins, the passkey login, and any new one): free key/value data that come with a login (an invitation token for
+instance). They become the `LoginContext.UserData` read by the login validators and the account creation and binding
+services. **They come from the client: untrusted**, verified by whoever uses them, and limited in number and size. A remote
+login keeps the data of its start on the authentication center: `IRemoteLoginCallbackCommand` doesn't carry them.
 
 A login always creates a new session that replaces the current one (and ends its impersonation). The session
 lifetimes are the policy of the authentication center: no command lets the client choose them.
