@@ -16,6 +16,9 @@ the responses are the JSON forms of WebAuthn, as strings: the client parses the 
 | [`IStartPasskeyRegistrationCommand`](IStartPasskeyRegistrationCommand.cs) | `string` (creation options) | `ICommandAuthCritical`. Starts adding a passkey to the current actor. Refused while impersonating. |
 | [`IPasskeyRegistrationCommand`](IPasskeyRegistrationCommand.cs) | [`IPasskeyRegistrationResult`](IPasskeyRegistrationResult.cs) | `ICommandAuthCritical`. The browser's response, from the session that started the registration: verified, then stored. |
 
+- **Validated at the entry** ([`IncomingValidators`](IncomingValidators.cs)): the responses are at most 16 KB and a
+  new passkey's name is not blank and at most 128 characters. A front refuses them before relaying; the authentication
+  center validates them again.
 - **Nothing here is secret:** a response is a signature over a challenge that can be used once, or a public key. The
   responses are not `[Sensitive]`.
 - **Adding a passkey requires the Critical level** (a recent login): a stolen session or a script that adds its own
