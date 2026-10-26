@@ -23,7 +23,8 @@ client sends these commands, and only them, to the dedicated authentication endp
 `IStartLoginCommand` knows no scheme in particular: the authentication center resolves the scheme and decides where
 the client goes - the authorization URL of a remote provider (OpenID Connect, OAuth...), or the login page of the
 application for a direct login scheme. The **direct logins** carry the credentials of one method and each one is a
-package of its own, so that an application only has the commands of the methods it installs:
+package of its own, so that an application only has the commands of the methods it installs. The packages that
+extend this one with concrete login commands are:
 
 | Package | Command |
 |---------|---------|

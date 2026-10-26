@@ -82,14 +82,16 @@ it is the archetypal unauthenticated command. `ILogoutCommand` and `IRefreshAuth
 operate on the ambient authentication rather than on an actor identifier carried by the caller, so
 they have nothing to declare either.
 
-That is why this package references [CK.IO.Auth](../CK.IO.Auth/README.md) without using a single one
-of its eleven interfaces. What the results actually need - `IAuthenticationInfo`, `IUserInfo` and
-`AuthLevel` - is declared further upstream and simply arrives along the chain.
+That is why this package references [CK.IO.Auth](../CK.IO.Auth/README.md) without using any of its
+interfaces. What the results actually need - `IAuthenticationInfo`, `IUserInfo` and `AuthLevel` - comes
+from its direct reference to
+[CK.Auth.Abstractions](https://github.com/signature-opensource/CK-Auth-Abstractions/blob/stable/CK.Auth.Abstractions/README.md).
 
 Everything here is in the `CK.Auth` namespace - the project sets `RootNamespace` to it, like
 `CK.IO.Auth` does.
 
-## Requires.
+## Requires
 
-- `CK.IO.Auth`, and nothing else. Note that this package uses none of its parts - the section above
-  says why.
+- `CK.IO.Auth`. Note that this package uses none of its parts - the section above says why.
+- [CK.Auth.Abstractions](https://github.com/signature-opensource/CK-Auth-Abstractions/blob/stable/CK.Auth.Abstractions/README.md)
+  for `IAuthenticationInfo`, `IUserInfo` and `AuthLevel`.

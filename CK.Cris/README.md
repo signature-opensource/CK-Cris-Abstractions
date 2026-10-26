@@ -77,9 +77,14 @@ its parts) as a parameter, and takes whatever services it needs as the other par
 
 ```csharp
 [IncomingValidator]
-public void CheckCultureName( UserMessageCollector validator, ICurrentCulturePart part )
+public void CheckCultureName( IActivityMonitor monitor, UserMessageCollector validator, ICurrentCulturePart part )
 {
     var n = part.CurrentCultureName;
+    if( n == null )
+    {
+        monitor.Warn( $"Culture name is null on '{part.CrisPocoModel.PocoName}'. Setting it to string.Empty." );
+        part.CurrentCultureName = string.Empty;
+    }
     if( string.IsNullOrEmpty( n ) || ExtendedCultureInfo.All.FindExtendedCultureInfo( n ) == null )
     {
         validator.Warn( n == null
@@ -94,12 +99,9 @@ Note its parameter: the method takes the **part**, not a command, so one method 
 that mixes `ICurrentCulturePart` in - written once, for a property that appears everywhere.
 
 The part is an `ICrisPocoPart`, so events may carry it too - but an `[IncomingValidator]` never runs
-for an event. The setup-time engine registers it and then empties the list for every event kind. The
-attribute's own summary says *"an incoming command, event or `ICrisPocoPart` validator"*; the engine
-disagrees, and the engine is what runs.
+for an event: the setup-time engine gives every event kind an empty list of incoming validators.
 
-[`CrisHandlerKind`](CrisHandlerKind.cs) names them - its own summary still says *"There are 5 kind of
-handlers"*, but the enum has seven values. In the order they run:
+[`CrisHandlerKind`](CrisHandlerKind.cs) names the seven handler kinds. In the order they run:
 
 | Attribute | Where it runs |
 |-----------|---------------|
@@ -177,10 +179,6 @@ it once at startup and again whenever something near the root changes.
 
 [`AmbientValues/README.md`](AmbientValues/README.md) is the long-form rationale for all of this, and
 it is the best text in the repository on *why* the indirection through an ambient service exists.
-Read it for that and not for its identifiers: it predates the current names - `ICrisPart`,
-`ICrisAuthenticated`, `ICrisCultureAware`, `ICommandWithCurrentCulture`,
-`IAmbientValuesCollectorCommand` and `ICultureAwareAmbientValues` do not exist any more - and it calls
-`IsSafe` "Secured".
 
 ## A result is unconstrained, until it is an error.
 
@@ -289,9 +287,9 @@ the model can point at the source of each handler it found.
 with no body and no delegation string. They mark a type rather than a method, and the engine reads
 their presence directly.
 
-## Requires.
+## Requires
 
 - `CK.StObj.Model` for `IPoco`, `IAutoService`, `IRealObject`, `AmbientServiceHub`,
   `ContextBoundDelegationAttribute` and the `[CKTypeDefiner]` / `[CKTypeSuperDefiner]` markers.
-- `CK.Globalization` for `UserMessage`, `UserMessageCollector`, `ExtendedCultureInfo` and
-  `CurrentCultureInfo`.
+- [CK.Globalization](https://github.com/signature-opensource/CK-Globalization/blob/stable/CK.Globalization/README.md)
+  for `UserMessage`, `UserMessageCollector`, `ExtendedCultureInfo` and `CurrentCultureInfo`.

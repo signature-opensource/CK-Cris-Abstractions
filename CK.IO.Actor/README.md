@@ -33,7 +33,7 @@ public interface ICreateUserCommandResult : IStandardResultPart
 | [`IAddMemberToGroupCommand`](IAddMemberToGroupCommand.cs) | `ICrisBasicCommandResult` | `GroupId`, `MemberId` |
 | [`IRemoveMemberFromGroupCommand`](IRemoveMemberFromGroupCommand.cs) | `ICrisBasicCommandResult` | `GroupId`, `MemberId` |
 | [`IClearMemberGroupsCommand`](IClearMemberGroupsCommand.cs) | `ICrisBasicCommandResult` | `MemberId` |
-| [`IRemoveAllUsersFromGroupCommand`](IRemoveAllUsersFromGroupCommand.cs) | `ICrisBasicCommandResult` | `GroupId` |
+| [`IRemoveAllMembersFromGroupCommand`](IRemoveAllMembersFromGroupCommand.cs) | `ICrisBasicCommandResult` | `GroupId` |
 
 Four result shapes, and the choice is not arbitrary. Six commands have nothing to report but success
 and messages, so they return `ICrisBasicCommandResult` unchanged. Three needed a field of their own -
@@ -70,13 +70,13 @@ public class IncomingValidators : IRealObject
 [`IncomingValidators`](IncomingValidators.cs) holds every check in the package - ten methods for
 eleven commands, `IGetUserProfileQCommand` being the one with none. Each is `virtual`, so an
 application can derive the real object and tighten a rule, and each error carries a message code
-(`User.InvalidUserId`, `Group.InvalidGroupId`, `User.InvalidUserName`) so a front end can react to the
+(`User.InvalidUserId`, `Group.InvalidGroupId`, `User.InvalidUserName`, `Member.InvalidMemberId`) so a front end can react to the
 rule rather than to the sentence.
 
 The thresholds are the reserved-identifier boundaries showing through, and they differ per command:
 
 - `UserId > 0` for most, but `UserId > 1` to destroy a user - user 1 is protected from destruction.
-- `GroupId > 0` for membership, but `GroupId > 2` to destroy a group.
+- `GroupId > 0` and `MemberId > 0` for membership, but `GroupId > 2` to destroy a group.
 
 `ValidateCreateGroupCommand` exists and validates nothing, with a comment saying so. It is a
 placeholder, and the honest reading is that creating a group has no argument to check - the command
@@ -93,9 +93,8 @@ implementation gets a command whose `ICrisPocoModel.Handlers` is empty, which is
 rather than a crash. Splitting it this way is what lets a client reference the contracts alone and a
 server bring both.
 
-The namespace is `CK.IO.Actor`, and unlike the auth packages in this repository, it matches the
-package name.
+The namespace is `CK.IO.Actor`: it matches the package name.
 
-## Requires.
+## Requires
 
 - `CK.IO.Auth`, for `ICommandAuthNormal`.

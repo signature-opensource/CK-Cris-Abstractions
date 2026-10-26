@@ -54,18 +54,13 @@ Empty, and it is the composition that carries the content:
 
 - `IPocoCommandExecutedPart` adds the *inner* command, its result, its validation messages and its
   own events.
-- `IEventSourceCommandPart` adds `SourceCommand`, meant for the `IDelayedCommand` that fired. Be
-  warned: the only code in the stack that assigns `SourceCommand` is the execution context, when a
-  handler emits an event from inside a command frame. The shipped delayed-command service dispatches
-  this one directly, so the property arrives **null** despite its `[NullInvalid]`.
+- `IEventSourceCommandPart` adds `SourceCommand`: the command that emitted the event.
 
 `[RoutedEvent]` is what makes it observable at all: without it an event only reaches the caller of the
 originating command, and here that caller is long gone.
 
-It is raised once the delayed command **has run**, not once it has run *successfully* - the dispatch
-is unconditional and the executed command it carries may hold an error. The "routed events are raised
-only on success" rule belongs to events emitted from a command's own execution frame; this one does
-not travel that path.
+It is raised once the delayed command **has been executed**, not once it has run *successfully*: the
+executed command it carries may hold an error.
 
 So an interested handler is a method, and nothing subscribes to anything:
 
@@ -87,7 +82,7 @@ persistence mechanism it does not own.
 The namespace is `CK.Cris`, not `CK.IO.DelayedCommand`: both types sit beside the core Cris types
 rather than in a namespace of their own.
 
-## Requires.
+## Requires
 
 - `CK.Cris`, for `ICommand`, `IEvent`, `IAbstractCommand`, `IEventSourceCommandPart`,
   `IPocoCommandExecutedPart` and `[RoutedEvent]`.

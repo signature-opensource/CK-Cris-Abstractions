@@ -67,8 +67,8 @@ application uses exactly one of them.
 
 | Stack | Ambient authentication | Validator |
 |-------|------------------------|-----------|
-| Legacy | `CK.Auth.IAuthenticationInfo` ([CK.Auth.Abstractions](https://github.com/signature-opensource/CK-Auth-Abstractions)) | `CK.Cris.Auth` |
-| Current | `CK.Core.AuthenticationInfo` (CK.AuthenticationInfo) | `CK.Cris.Authentication` |
+| Legacy | `CK.Auth.IAuthenticationInfo` ([CK.Auth.Abstractions](https://github.com/signature-opensource/CK-Auth-Abstractions/blob/stable/CK.Auth.Abstractions/README.md)) | `CK.Cris.Auth` |
+| Current | `CK.Core.AuthenticationInfo` ([CK.AuthenticationInfo](https://github.com/signature-opensource/CK-Auth-Abstractions/blob/stable/CK.AuthenticationInfo/README.md)) | `CK.Cris.Authentication` |
 
 That is the whole reason the levels are parts rather than a service call: the *command* says what it
 needs, the *endpoint* knows how to prove it, and the two never reference each other.
@@ -117,7 +117,7 @@ use those parts. Key authentication information is not just "who", and this Poco
 Note the namespace: everything here is `CK.Auth`, not `CK.Cris` - the project sets `RootNamespace`
 accordingly. `IAmbientValues` itself is in `CK.Cris.AmbientValues`.
 
-## Requires.
+## Requires
 
 - `CK.Cris`, for `ICommandPart`, `ICrisPocoPart`, `[AmbientServiceValue]` and `IAmbientValues`.
 
