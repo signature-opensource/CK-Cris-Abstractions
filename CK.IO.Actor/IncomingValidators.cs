@@ -43,7 +43,7 @@ public class IncomingValidators : IRealObject
     {
         if( cmd.MemberId <= 0 )
         {
-            collector.Error( "UserId must be greater than 0.", "User.InvalidUserId" );
+            collector.Error( "MemberId must be greater than 0.", "Member.InvalidMemberId" );
         }
     }
 
