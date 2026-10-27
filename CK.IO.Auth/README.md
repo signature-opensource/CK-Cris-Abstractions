@@ -80,24 +80,6 @@ must be checked by at least one `[IncomingValidator]`, and the setup fails for a
 nobody checks. A System that doesn't care about users (parties working together over CK.AppIdentity, for
 instance) simply doesn't handle these commands; one that does must install a validator.
 
-## One part says where a command runs, not what it requires.
-
-```csharp
-[CKTypeDefiner]
-public interface ICommandAuthCenter : ICommandPart { }
-```
-
-[`ICommandAuthCenter`](ICommandAuthCenter.cs) declares no property and no level: it marks the commands executed by the
-Authentication Center - what a login point serves. That is the actor's self-service on its own login methods (list,
-rename, delete its passkeys, change its password) and what the login needs (the login schemes). It is never the
-administration, even of the authentication data (banning a user, an administrator's removal of a passkey): an
-Authentication Center is a login point, not an administration point.
-
-A front whose Authentication Center is remote relays these commands with the caller's proof (its token and its
-binding), and the Authentication Center accepts only them from its fronts. Without an Authentication Center, or with
-a local one, the part changes nothing: the command executes where it is received. It lives here, with the levels,
-because the commands that take it are shared by both stacks.
-
 ## The collected values are richer than the actor identifier.
 
 ```csharp
