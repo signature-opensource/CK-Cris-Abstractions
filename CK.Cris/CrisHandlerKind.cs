@@ -3,12 +3,12 @@ using CK.Core;
 namespace CK.Cris;
 
 /// <summary>
-/// There are 5 kind of handlers.
+/// There are 7 kinds of handlers.
 /// </summary>
 public enum CrisHandlerKind
 {
     /// <summary>
-    /// Validates an incoming command, event or part (when the Cris Poco is received).
+    /// Validates an incoming command or command part (when the Cris Poco is received). Never applies to events.
     /// </summary>
     IncomingValidator,
 

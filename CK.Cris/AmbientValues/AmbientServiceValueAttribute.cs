@@ -31,7 +31,7 @@ namespace CK.Cris;
 public sealed class AmbientServiceValueAttribute : ContextBoundDelegationAttribute, INullInvalidAttribute
 {
     /// <summary>
-    /// Initializes a new <see cref="AmbientValuesService"/>.
+    /// Initializes a new <see cref="AmbientServiceValueAttribute"/>.
     /// </summary>
     /// <param name="isSafe">Whether this is a safe ambient service.</param>
     public AmbientServiceValueAttribute( bool isSafe = false )

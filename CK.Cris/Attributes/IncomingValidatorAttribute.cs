@@ -6,8 +6,9 @@ namespace CK.Cris;
 
 
 /// <summary>
-/// Decorates a method that is an incoming command, event or <see cref="ICrisPocoPart"/> validator.
-/// The validator is called in the context of the endpoint that receive the command or event: it can use any ambient
+/// Decorates a method that is an incoming command (or <see cref="ICrisPocoPart"/> of a command) validator.
+/// Incoming validators never apply to events: a validator of a part shared with events is ignored for the events.
+/// The validator is called in the context of the endpoint that receives the command: it can use any ambient
 /// or processwide singletons services (typically related to authentication, tenancy, culture, etc.).
 /// <para>
 /// For commands, using "execution" services that are close to the execution of the command, should be avoided:
