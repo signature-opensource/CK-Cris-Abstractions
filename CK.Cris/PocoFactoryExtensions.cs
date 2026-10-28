@@ -86,10 +86,8 @@ public static class PocoFactoryExtensions
         }
         ex.GetUserMessages( collector, currentCulture, 0, null, leakAll );
         // Always logged since we opened an Error group.
-        // A Poco with sensitive data is never logged with its content.
-        monitor.Info( crisPoco.CrisPocoModel.HasSensitiveData
-                        ? $"{crisPoco.CrisPocoModel.PocoName} (sensitive content not logged)"
-                        : crisPoco.ToString()!, ex );
+        // A Poco with sensitive data is logged with its sensitive values redacted.
+        monitor.Info( crisPoco.ToLogString(), ex );
         return g.GetLogKeyString()!;
     }
 }

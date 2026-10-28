@@ -7,5 +7,7 @@
   <ItemGroup>
     <PackageReference Include="CK.Globalization" Version="8.0.0-0.cris-auth.0.ci.7" />
     <PackageReference Include="CK.StObj.Model" Version="36.0.0-0.cris-auth.0.ci.6" />
+    <!-- TEMPORARY: only for the clone of SensitiveDataExtensions.ToLogString (to be replaced by the planned Poco Clone()). -->
+    <PackageReference Include="CK.Poco.Exc.Json" Version="36.0.0-0.cris-auth.0.ci.6" />
   </ItemGroup>
 </Project>
