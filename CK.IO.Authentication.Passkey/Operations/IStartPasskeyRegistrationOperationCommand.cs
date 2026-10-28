@@ -11,6 +11,11 @@ namespace CK.IO.Authentication.Passkey;
 public interface IStartPasskeyRegistrationOperationCommand : ICommand<string>, ICommandAuthCritical, ICommandPresentedSession
 {
     /// <summary>
+    /// Gets or sets the start registration command (data: it is never executed; it carries the new passkey's name).
+    /// </summary>
+    IStartPasskeyRegistrationCommand? Start { get; set; }
+
+    /// <summary>
     /// Gets or sets the origin of the web page that sent the command, as checked by the endpoint.
     /// </summary>
     string WebOrigin { get; set; }
