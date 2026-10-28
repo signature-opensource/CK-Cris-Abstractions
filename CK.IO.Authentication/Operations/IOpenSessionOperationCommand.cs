@@ -28,7 +28,8 @@ public interface IOpenSessionOperationCommand : ICommand<ISessionOperationResult
     bool RememberMe { get; set; }
 
     /// <summary>
-    /// Gets or sets the user data of the login. Null: the payload's own (when it has the <see cref="ICommandLoginUserData"/> part).
+    /// Gets the user data of the login that replace the payload's own. Empty: the payload's own are used (when it has
+    /// the <see cref="ICommandLoginUserData"/> part).
     /// </summary>
-    IDictionary<string, string>? UserData { get; set; }
+    IDictionary<string, string> UserData { get; }
 }
