@@ -7,7 +7,9 @@
   <ItemGroup>
     <PackageReference Include="CK.Globalization" Version="8.0.0-0.cris-auth.0.ci.7" />
     <PackageReference Include="CK.StObj.Model" Version="36.0.0-0.cris-auth.0.ci.6" />
-    <!-- TEMPORARY: only for the clone of SensitiveDataExtensions.ToLogString (to be replaced by the planned Poco Clone()). -->
+    <!-- TODO: TEMPORARY WORKAROUND for the lack of a Poco clone. This reference exists ONLY for the JSON round-trip
+         that clones a command in SensitiveDataExtensions.ToLogString: remove it (and the CK.Poco.Exc.Json.Engine
+         reference of CK.Cris.Engine) once the planned Create<T>() / Clone() of any Poco exists (cris-auth note 34). -->
     <PackageReference Include="CK.Poco.Exc.Json" Version="36.0.0-0.cris-auth.0.ci.6" />
   </ItemGroup>
 </Project>
