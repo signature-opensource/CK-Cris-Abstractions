@@ -137,6 +137,14 @@ public interface ICrisPocoModel
         IReadOnlyList<Type> Parameters { get; }
 
         /// <summary>
+        /// Gets whether the parameter at <paramref name="index"/> in <see cref="Parameters"/> is optional: it has a
+        /// default value (for instance <c>IRemoteParty? caller = null</c>) and is null when its service is not available.
+        /// </summary>
+        /// <param name="index">The index of the parameter.</param>
+        /// <returns>True if the parameter is optional.</returns>
+        bool IsOptionalParameter( int index );
+
+        /// <summary>
         /// Gets the name of the file that implements the handler.
         /// </summary>
         string FileName { get; }
