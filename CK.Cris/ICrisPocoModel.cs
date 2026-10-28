@@ -64,6 +64,13 @@ public interface ICrisPocoModel
     bool HasSensitiveData { get; }
 
     /// <summary>
+    /// Gets who may send this command: the most restrictive of the <see cref="InternalAttribute"/> and
+    /// <see cref="PrivateAttribute"/> declared by the interfaces of the command family. Always <see cref="CrisExposure.Public"/>
+    /// for an event. Computed by the engine at setup.
+    /// </summary>
+    CrisExposure Exposure { get; }
+
+    /// <summary>
     /// Gets whether this command or event when executed in the background without a <see cref="AmbientServiceHub"/>
     /// provided by a receiving endpoint must configure the background services before being executed (at least one
     /// [RestoreAmbientService] method exists for it).
@@ -76,7 +83,8 @@ public interface ICrisPocoModel
     ImmutableArray<string> AmbientValuePropertyNames { get; }
 
     /// <summary>
-    /// Gets whether this command or event is handled: <see cref="Handlers"/> is not empty.
+    /// Gets whether this command or event is handled: a command has a command handler, a routed event has at least one
+    /// routed event handler. The other <see cref="Handlers"/> (validators, restorers, post handlers...) don't count.
     /// <para>
     /// A <see cref="CrisPocoKind.CallerOnlyEvent"/> (a <see cref="IEvent"/> without [RoutedEvent])
     /// is never handled.
