@@ -48,10 +48,20 @@ public static class SensitiveDataExtensions
     // TODO: TEMPORARY WORKAROUND for the lack of a Poco clone (a JSON round-trip, the only reason why CK.Cris references
     //       CK.Poco.Exc.Json). To be replaced by the planned Create<T>() / Clone() of any Poco
     //       (see .wip/cris-auth/34-engine-ideas.md, "Create<T>() on any Poco").
+    // Logging never fails: without the JSON exchange in the application (or on any error), there is no copy.
     static ICrisPoco? Clone( ICrisPoco poco )
     {
         var directory = ((IPocoGeneratedClass)poco).Factory.PocoDirectory;
-        var json = poco.ToString( PocoJsonExportOptions.ToStringDefault, withType: true );
-        return directory.ReadJson( json, PocoJsonImportOptions.ToStringDefault ) as ICrisPoco;
+        if( directory is not IPocoDirectoryExchangeGenerated ) return null;
+        try
+        {
+            var json = poco.ToString( PocoJsonExportOptions.ToStringDefault, withType: true );
+            return directory.ReadJson( json, PocoJsonImportOptions.ToStringDefault ) as ICrisPoco;
+        }
+        catch( System.Exception ex )
+        {
+            ActivityMonitor.StaticLogger.Warn( $"Unable to copy '{poco.CrisPocoModel.PocoName}' for a redacted log.", ex );
+            return null;
+        }
     }
 }
