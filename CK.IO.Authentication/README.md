@@ -33,6 +33,29 @@ extend this one with concrete login commands are:
 | [CK.IO.Authentication.WeakZone](../CK.IO.Authentication.WeakZone/README.md) | Extends `IWeakLoginCommand` with the `ZoneId` of the weak actor. |
 | [CK.IO.Authentication.Passkey](../CK.IO.Authentication.Passkey/README.md) | The passkey (WebAuthn) login and registration: two commands per ceremony, the browser in between. |
 
+## The internal operations
+
+The session commands are executed by the endpoint that receives them, on the authentication center as on any other
+party. What changes the state of the sessions (the session store, the login providers, the token signing) is an
+**internal operation**, an ordinary [`[Internal]`](../CK.Cris/Attributes/InternalAttribute.cs) command that the endpoint
+executes: handled locally by the authentication center, dispatched to it from the other parties. Front applications
+never send them.
+
+| Operation | For | Result |
+|---|---|---|
+| [`IOpenSessionOperationCommand`](Operations/IOpenSessionOperationCommand.cs) | A login: the scheme, the login command as payload (data, never executed) | [`ISessionOperationResult`](Operations/ISessionOperationResult.cs) |
+| [`IRefreshSessionOperationCommand`](Operations/IRefreshSessionOperationCommand.cs) | `IRefreshSessionCommand` | `ISessionOperationResult` |
+| [`ILogoutSessionOperationCommand`](Operations/ILogoutSessionOperationCommand.cs) | `ILogoutSessionCommand` | `ISessionOperationResult` (`Cleared`) |
+| [`IImpersonateOperationCommand`](Operations/IImpersonateOperationCommand.cs) | `IImpersonateCommand` (`ICommandAuthCritical`) | `ISessionOperationResult` |
+| [`IClearImpersonationOperationCommand`](Operations/IClearImpersonationOperationCommand.cs) | `IClearImpersonationCommand` | `ISessionOperationResult` |
+| [`IStartRemoteLoginOperationCommand`](Operations/IStartRemoteLoginOperationCommand.cs) | `IStartLoginCommand` (data), the callback URL and the correlation hash | `RedirectedUrl` |
+| [`ICompleteRemoteLoginOperationCommand`](Operations/ICompleteRemoteLoginOperationCommand.cs) | `IRemoteLoginCallbackCommand` (data), the presented correlation hash | `ISessionOperationResult` |
+
+Two parts carry what the endpoint knows: [`ICommandPresentedSession`](Operations/ICommandPresentedSession.cs) (the key
+and the secret hashes of the presented session) and [`ICommandNextSessionSecrets`](Operations/ICommandNextSessionSecrets.cs)
+(the hashes of the secrets the endpoint prepared). The secrets themselves never leave the endpoint; the
+`ISessionOperationResult` tells it what to issue or clear.
+
 ## The login's user data
 
 [`ICommandLoginUserData`](ICommandLoginUserData.cs) is the part of the login commands (`IStartLoginCommand`, the direct

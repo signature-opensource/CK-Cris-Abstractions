@@ -244,6 +244,25 @@ that must not survive their reception because they carry secrets.
 event that captures its source command (`IEventSourceCommandPart`) fails. The property is exchanged as usual - this is
 about not leaking, not about not sending.
 
+## Some commands are not for everybody, and some are addressed to a party.
+
+[`[Internal]`](Attributes/InternalAttribute.cs) and [`[Private]`](Attributes/PrivateAttribute.cs) say **who may send**
+a command, not where it runs:
+
+| Exposure | Front applications (HTTP) | Parties of the System | Parties outside the System | In-process |
+|---|---|---|---|---|
+| *(none)*: public | yes | yes | yes | yes |
+| `[Internal]` | no | yes | no | yes |
+| `[Private]` | no | no | no | yes |
+
+The System is the tenant domain: the parties that share the receiving party's domain and environment names. The most
+restrictive declaration of a command family wins: an extension can restrict a command, never open it.
+
+A command is a **singleton command** by default: it has one eventual handler in the tenant domain, wherever it is (where
+a command runs is a deployment detail). A command with the [`ICommandTargetParty`](Command/ICommandTargetParty.cs)
+part is a **party command**: it is addressed to the party named by its `TargetPartyFullName`, and many parties may
+handle it, each one for itself.
+
 ## An event is caller-only until an attribute says otherwise.
 
 Emitting an event needs [`ICrisCommandContext`](ICrisCommandContext.cs) as a handler parameter, and by

@@ -4,8 +4,8 @@ using CK.Cris;
 namespace CK.IO.Authentication.Passkey;
 
 /// <summary>
-/// Validates the passkey commands when they enter the System: a front that relays them to a remote authentication
-/// center refuses them at its entry, and the authentication center validates them again.
+/// Validates the passkey commands when they enter the System: the endpoint that receives them refuses them at its
+/// entry, and the authentication center validates the data of its passkey operations again.
 /// </summary>
 public class IncomingValidators : IRealObject
 {
