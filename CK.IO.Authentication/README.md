@@ -68,7 +68,10 @@ A login always creates a new session that replaces the current one (and ends its
 lifetimes are the policy of the authentication center: no command lets the client choose them.
 
 [`IGetLoginSchemesQCommand`](IGetLoginSchemesQCommand.cs) is not a session command: anybody can ask the available
-schemes so that a login interface shows only what exists.
+schemes so that a login interface shows only what exists. Each [`ILoginSchemeInfo`](ILoginSchemeInfo.cs) gives the
+scheme's name and the lifetime of the Critical level after a login with it: zero when the scheme cannot elevate an actor
+to Critical. With the schemes of the actor, a user interface knows whether the user can reach the Critical level, and
+lists only these schemes when a Critical level is required.
 
 ## The results describe, they don't authenticate
 
