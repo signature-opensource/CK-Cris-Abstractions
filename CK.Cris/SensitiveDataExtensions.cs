@@ -1,5 +1,4 @@
 using CK.Core;
-using CK.Poco.Exc.Json;
 
 namespace CK.Cris;
 
@@ -37,7 +36,7 @@ public static class SensitiveDataExtensions
     {
         Throw.CheckNotNullArgument( poco );
         if( !poco.CrisPocoModel.HasSensitiveData ) return poco.ToString()!;
-        var copy = Clone( poco );
+        var copy = Copy( poco );
         if( copy == null || !copy.TransformSensitiveStrings( static ( o, n, v ) => Redacted ) )
         {
             return $"{poco.CrisPocoModel.PocoName} (sensitive content not logged)";
@@ -45,18 +44,12 @@ public static class SensitiveDataExtensions
         return copy.ToString()!;
     }
 
-    // TODO: TEMPORARY WORKAROUND for the lack of a Poco clone (a JSON round-trip, the only reason why CK.Cris references
-    //       CK.Poco.Exc.Json). To be replaced by the planned Create<T>() / Clone() of any Poco
-    //       (see .wip/cris-auth/34-engine-ideas.md, "Create<T>() on any Poco").
-    // Logging never fails: without the JSON exchange in the application (or on any error), there is no copy.
-    static ICrisPoco? Clone( ICrisPoco poco )
+    // Logging never fails: the deep copy throws only when an object property holds a type that is not a registered Poco type.
+    static ICrisPoco? Copy( ICrisPoco poco )
     {
-        var directory = ((IPocoGeneratedClass)poco).Factory.PocoDirectory;
-        if( directory is not IPocoDirectoryExchangeGenerated ) return null;
         try
         {
-            var json = poco.ToString( PocoJsonExportOptions.ToStringDefault, withType: true );
-            return directory.ReadJson( json, PocoJsonImportOptions.ToStringDefault ) as ICrisPoco;
+            return poco.Clone();
         }
         catch( System.Exception ex )
         {
