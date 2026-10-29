@@ -35,4 +35,14 @@ public interface IStartLoginCommand : ICommand<RedirectedUrl>, ICommandAuthentic
     /// Gets or sets whether the session must be remembered.
     /// </summary>
     bool RememberMe { get; set; }
+
+    /// <summary>
+    /// Gets or sets whether this login is meant to reach the Critical level: the remote provider must authenticate the
+    /// user again, even when the user has a session there (OpenID Connect: <c>prompt=login</c> and <c>max_age=0</c>).
+    /// <para>
+    /// The Critical level is granted on a fresh authentication only, that the Authentication Center verifies (OpenID Connect:
+    /// the <c>auth_time</c> of the identity token): a provider that ignores the request gives a Normal login.
+    /// </para>
+    /// </summary>
+    bool Critical { get; set; }
 }
