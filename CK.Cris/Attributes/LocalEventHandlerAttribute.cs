@@ -8,15 +8,15 @@ namespace CK.Cris;
 /// Decorates a method that is a <see cref="IEvent"/> handler.
 /// </summary>
 [AttributeUsage( AttributeTargets.Method, AllowMultiple = false, Inherited = false )]
-public sealed class RoutedEventHandlerAttribute : ContextBoundDelegationAttribute
+public sealed class LocalEventHandlerAttribute : ContextBoundDelegationAttribute
 {
     /// <summary>
-    /// Initializes a new <see cref="RoutedEventHandlerAttribute"/>.
+    /// Initializes a new <see cref="LocalEventHandlerAttribute"/>.
     /// </summary>
     /// <param name="fileName">Captures the source file name of the handler definition.</param>
     /// <param name="lineNumber">Captures the source line number of the handler definition.</param>
-    public RoutedEventHandlerAttribute( [CallerFilePath] string? fileName = null, [CallerLineNumber] int lineNumber = 0 )
-        : base( "CK.Setup.Cris.RoutedEventHandlerAttributeImpl, CK.Cris.Engine" )
+    public LocalEventHandlerAttribute( [CallerFilePath] string? fileName = null, [CallerLineNumber] int lineNumber = 0 )
+        : base( "CK.Setup.Cris.LocalEventHandlerAttributeImpl, CK.Cris.Engine" )
     {
         FileName = fileName;
         LineNumber = lineNumber;

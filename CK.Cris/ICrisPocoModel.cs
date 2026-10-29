@@ -95,17 +95,17 @@ public interface ICrisPocoModel
     ImmutableArray<string> AmbientValuePropertyNames { get; }
 
     /// <summary>
-    /// Gets whether this command or event is handled: a command has a command handler, a routed event has at least one
-    /// routed event handler. The other <see cref="Handlers"/> (validators, restorers, post handlers...) don't count.
+    /// Gets whether this command or event is handled: a command has a command handler, a local event has at least one
+    /// local event handler. The other <see cref="Handlers"/> (validators, restorers, post handlers...) don't count.
     /// <para>
-    /// A <see cref="CrisPocoKind.CallerOnlyEvent"/> (a <see cref="IEvent"/> without [RoutedEvent])
+    /// A <see cref="CrisPocoKind.CallerOnlyEvent"/> (a <see cref="IEvent"/> without [LocalEvent])
     /// is never handled.
     /// </para>
     /// </summary>
     bool IsHandled { get; }
 
     /// <summary>
-    /// Exposes the description of a method that handles a command or routed event.
+    /// Exposes the description of a method that handles a command or local event.
     /// <para>
     /// This should expose the documentation of the method (from Xml generated).
     /// </para>

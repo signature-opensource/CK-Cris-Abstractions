@@ -3,7 +3,7 @@ namespace CK.Cris;
 /// <summary>
 /// Event raised once a <see cref="IDelayedCommand"/> has been executed.
 /// </summary>
-[RoutedEvent]
+[LocalEvent]
 public interface IDelayedCommandExecutedEvent : IEventSourceCommandPart, IPocoCommandExecutedPart, IEvent
 {
 }

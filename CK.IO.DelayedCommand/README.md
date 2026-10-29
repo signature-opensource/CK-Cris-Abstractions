@@ -41,10 +41,10 @@ persisted"* - so the flag caps the guarantee rather than granting it. False on a
 implementation gets you memory anyway, silently. There is nothing here to ask an implementation what
 it supports.
 
-## The completion is a routed event.
+## The completion is a local event.
 
 ```csharp
-[RoutedEvent]
+[LocalEvent]
 public interface IDelayedCommandExecutedEvent : IEventSourceCommandPart, IPocoCommandExecutedPart, IEvent
 {
 }
@@ -56,7 +56,7 @@ Empty, and it is the composition that carries the content:
   own events.
 - `IEventSourceCommandPart` adds `SourceCommand`: the command that emitted the event.
 
-`[RoutedEvent]` is what makes it observable at all: without it an event only reaches the caller of the
+`[LocalEvent]` is what makes it observable at all: without it an event only reaches the caller of the
 originating command, and here that caller is long gone.
 
 It is raised once the delayed command **has been executed**, not once it has run *successfully*: the
@@ -65,7 +65,7 @@ executed command it carries may hold an error.
 So an interested handler is a method, and nothing subscribes to anything:
 
 ```csharp
-[RoutedEventHandler]
+[LocalEventHandler]
 public void OnDelayedExecuted( IDelayedCommandExecutedEvent e ) { /* e.Result, e.Command */ }
 ```
 
@@ -85,4 +85,4 @@ rather than in a namespace of their own.
 ## Requires
 
 - `CK.Cris`, for `ICommand`, `IEvent`, `IAbstractCommand`, `IEventSourceCommandPart`,
-  `IPocoCommandExecutedPart` and `[RoutedEvent]`.
+  `IPocoCommandExecutedPart` and `[LocalEvent]`.

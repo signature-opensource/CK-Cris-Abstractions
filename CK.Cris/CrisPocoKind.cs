@@ -28,15 +28,15 @@ public enum CrisPocoKind
     CallerOnlyImmediateEvent,
 
     /// <summary>
-    /// A <see cref="IEvent"/> that is immediately routed to all routed
-    /// event handlers that can handle it.
+    /// A <see cref="IEvent"/> that is immediately dispatched to all the local
+    /// event handlers that can handle it, where the command executes (never across a party boundary).
     /// </summary>
-    RoutedImmediateEvent,
+    LocalImmediateEvent,
 
     /// <summary>
-    /// A <see cref="IEvent"/> that will be routed to all routed
+    /// A <see cref="IEvent"/> that will be dispatched to all the local
     /// event handlers that can handle it once the command
-    /// has been successfully executed.
+    /// has been successfully executed, where it executed (never across a party boundary).
     /// </summary>
-    RoutedEvent
+    LocalEvent
 }

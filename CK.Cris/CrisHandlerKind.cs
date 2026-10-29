@@ -39,7 +39,7 @@ public enum CrisHandlerKind
     CommandPostHandler,
 
     /// <summary>
-    /// Handles a <see cref="IEvent"/> decorated with a <see cref="RoutedEventAttribute"/>.
+    /// Handles a <see cref="IEvent"/> decorated with a <see cref="LocalEventAttribute"/>.
     /// </summary>
-    RoutedEventHandler
+    LocalEventHandler
 }

@@ -111,7 +111,7 @@ for an event: the setup-time engine gives every event kind an empty list of inco
 | `[CommandHandlingValidator]` | immediately before the handler, in the handler's own unit of work |
 | `[CommandHandler]` | the handler |
 | `[CommandPostHandler]` | after it, and it may take the result as a parameter and modify it |
-| `[RoutedEventHandler]` | for an event marked `[RoutedEvent]` |
+| `[LocalEventHandler]` | for an event marked `[LocalEvent]` |
 
 The two validators are the distinction that matters. `[IncomingValidator]` checks the *surface* of the
 command against ambient services - authentication, tenancy, culture - and runs where the command
@@ -276,10 +276,10 @@ extension - change that, and their four combinations are the four event kinds of
 | | default | `[ImmediateEvent]` |
 |-|---------|--------------------|
 | default | `CallerOnlyEvent` | `CallerOnlyImmediateEvent` |
-| `[RoutedEvent]` | `RoutedEvent` - routed once the command succeeded | `RoutedImmediateEvent` - routed at once |
+| `[LocalEvent]` | `LocalEvent` - dispatched once the command succeeded | `LocalImmediateEvent` - dispatched at once |
 
 "Once the command succeeded" is the part to hold on to: a non-immediate event of a command that fails
-is never routed, and `IExecutedCommand.Events` is non-empty only on success. An immediate event is
+is never dispatched, and `IExecutedCommand.Events` is non-empty only on success. An immediate event is
 raised as it is emitted, so it escapes that guarantee - which is the reason to think before using it.
 
 `ICrisEventContext` also lets a handler *execute* commands, and the whole interface is documented as
@@ -305,7 +305,7 @@ The `[CallerFilePath]` and `[CallerLineNumber]` on the seven handler constructor
 diagnostics-by-accident either: they end up on `ICrisPocoModel.IHandler.FileName` and `LineNumber`, so
 the model can point at the source of each handler it found.
 
-`[RoutedEvent]` and `[ImmediateEvent]` are the exceptions to all of this - plain `System.Attribute`
+`[LocalEvent]` and `[ImmediateEvent]` are the exceptions to all of this - plain `System.Attribute`
 with no body and no delegation string. They mark a type rather than a method, and the engine reads
 their presence directly.
 
