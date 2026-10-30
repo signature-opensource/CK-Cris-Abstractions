@@ -1,10 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
-    <RootNamespace>CK.Auth</RootNamespace>
+    <!-- Tombstone: no assembly, no dependencies. -->
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <!-- NU5128: the package has no lib/ folder, on purpose. -->
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+    <Description>Deprecated: replaced by CK.IO.Authentication.Basic.</Description>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CK.IO.Auth\CK.IO.Auth.csproj" />
-    <PackageReference Include="CK.Auth.Abstractions" Version="15.0.0-0.cris-auth.0.ci.8" />
+    <Content Include="MSBuild/CK.IO.Auth.Basic.targets">
+      <Pack>true</Pack>
+      <PackagePath>buildTransitive\CK.IO.Auth.Basic.targets</PackagePath>
+    </Content>
   </ItemGroup>
 </Project>

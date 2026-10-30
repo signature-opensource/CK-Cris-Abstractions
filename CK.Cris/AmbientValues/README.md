@@ -60,7 +60,7 @@ of a request. A console application can resolve it from its command line.
 The Endpoint being in charge of providing the trustable Ambient service, validation of the safe AmbientService value
 is then done by an `[IncomingValidator]` that compares the value of the part with the one of the Ambient service and
 emits an error when they differ. For an example of such validators, see the `CrisAuthenticationService` of
-[CK.Cris.Auth](https://github.com/signature-opensource/CK-Cris/blob/stable/CK.Cris.Auth/README.md) in CK-Cris.
+[CK.Cris.Authentication](https://github.com/signature-opensource/CK-Cris/blob/stable/CK.Cris.Authentication/README.md) in CK-Cris.
 
 ## Non safe AmbientService values: where do they go?
 
@@ -186,4 +186,4 @@ is required since it identifies the command handled by this CommandPostHandler.
 
 The `IAuthAmbientValues` are filled the same way by the package that handles the authentication parts (for an example,
 see the `CrisAuthenticationService` of
-[CK.Cris.Auth](https://github.com/signature-opensource/CK-Cris/blob/stable/CK.Cris.Auth/README.md) in CK-Cris).
+[CK.Cris.Authentication](https://github.com/signature-opensource/CK-Cris/blob/stable/CK.Cris.Authentication/README.md) in CK-Cris).

@@ -1,8 +1,7 @@
 # CK.IO.Authentication
 
-The commands of the authentication session for the CK.AuthenticationInfo model. They replace
-[CK.IO.Auth.Basic](../CK.IO.Auth.Basic/README.md), that belongs to the legacy CK.Auth.Abstractions stack.
-This package contains no executable code: the authentication center handles these commands.
+The commands of the authentication session for the CK.AuthenticationInfo model. This package contains no executable
+code: the authentication center handles these commands.
 
 ## The session commands are endpoint only
 

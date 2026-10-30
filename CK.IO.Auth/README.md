@@ -62,13 +62,10 @@ twelve interfaces and six properties. The guarantee behind `Normal` or `Critical
 `[IncomingValidator]` living wherever the command is received, comparing the command's `ActorId`
 against the ambient authentication and refusing the mismatch.
 
-This package doesn't even reference an authentication model: two stacks implement these parts, and an
-application uses exactly one of them.
-
-| Stack | Ambient authentication | Validator |
-|-------|------------------------|-----------|
-| Legacy | `CK.Auth.IAuthenticationInfo` ([CK.Auth.Abstractions](https://github.com/signature-opensource/CK-Auth-Abstractions/blob/stable/CK.Auth.Abstractions/README.md)) | `CK.Cris.Auth` |
-| Current | `CK.Core.AuthenticationInfo` ([CK.AuthenticationInfo](https://github.com/signature-opensource/CK-Auth-Abstractions/blob/stable/CK.AuthenticationInfo/README.md)) | `CK.Cris.Authentication` |
+This package doesn't even reference an authentication model: the ambient authentication is the
+`CK.Core.AuthenticationInfo` of [CK.AuthenticationInfo](https://github.com/signature-opensource/CK-Auth-Abstractions/blob/stable/CK.AuthenticationInfo/README.md),
+and the validator of these parts is the `CrisAuthenticationService` of
+[CK.Cris.Authentication](https://github.com/signature-opensource/CK-Cris/blob/stable/CK.Cris.Authentication/README.md).
 
 That is the whole reason the levels are parts rather than a service call: the *command* says what it
 needs, the *endpoint* knows how to prove it, and the two never reference each other.

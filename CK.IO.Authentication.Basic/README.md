@@ -4,5 +4,5 @@ The basic login of the CK.AuthenticationInfo model: [`IBasicLoginCommand`](IBasi
 name and a password (the "Basic" scheme). The password is `[Sensitive]`: it is never logged, and the command, an
 `ICommandAuthenticationSession`, is executed by its receiving endpoint only.
 
-It replaces the legacy `CK.Auth.IBasicLoginCommand` of CK.IO.Auth.Basic: the session lifetimes are the policy of the
-authentication center and cannot be chosen by the client. See [CK.IO.Authentication](../CK.IO.Authentication/README.md).
+The session lifetimes are the policy of the authentication center and cannot be chosen by the client. See
+[CK.IO.Authentication](../CK.IO.Authentication/README.md).
