@@ -45,4 +45,16 @@ public interface IStartLoginCommand : ICommand<RedirectedUrl>, ICommandAuthentic
     /// </para>
     /// </summary>
     bool Critical { get; set; }
+
+    /// <summary>
+    /// Gets or sets whether the identity authenticated by the remote provider must be bound to the current actor (a new
+    /// sign-in method of the current user) instead of opening a session.
+    /// <para>
+    /// The current session must be at the <see cref="CK.Core.AuthLevel.Critical"/> level (a stolen session must not
+    /// add the thief's identity as a way in) and not impersonated. The binding completes in the browser that started
+    /// it, while this session is alive; an identity already bound to another user is refused, and no account is ever
+    /// created. The current session continues: no session is issued.
+    /// </para>
+    /// </summary>
+    bool BindToCurrentActor { get; set; }
 }

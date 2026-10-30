@@ -5,9 +5,13 @@ namespace CK.IO.Authentication;
 /// <summary>
 /// Internal operation of <see cref="IStartLoginCommand"/>: starts a remote login (OpenID Connect...) and returns the
 /// provider URL to which the caller is redirected.
+/// <para>
+/// The presented session is the proof of the current actor when the login binds the identity to it
+/// (<see cref="IStartLoginCommand.BindToCurrentActor"/>).
+/// </para>
 /// </summary>
 [Internal]
-public interface IStartRemoteLoginOperationCommand : ICommand<RedirectedUrl>
+public interface IStartRemoteLoginOperationCommand : ICommand<RedirectedUrl>, ICommandPresentedSession
 {
     /// <summary>
     /// Gets or sets the start login command (data: it is never executed).

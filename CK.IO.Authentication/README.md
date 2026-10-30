@@ -13,7 +13,7 @@ client sends these commands, and only them, to the dedicated authentication endp
 
 | Command | Result | What it does |
 |---------|--------|--------------|
-| [`IStartLoginCommand`](IStartLoginCommand.cs) | `RedirectedUrl` | **The generic login**, for any scheme, with no credential: the client navigates to the URL (inline or in a popup). `ReturnUrl` is a relative path. |
+| [`IStartLoginCommand`](IStartLoginCommand.cs) | `RedirectedUrl` | **The generic login**, for any scheme, with no credential: the client navigates to the URL (inline or in a popup). `ReturnUrl` is a relative path. With `BindToCurrentActor`, a remote login binds the identity to the current actor (a new sign-in method of the user, from a Critical session) instead of opening a session. |
 | [`IRemoteLoginCallbackCommand`](IRemoteLoginCallbackCommand.cs) | `ISessionResult` | Completes a remote login: what the provider sent back (`State`, `[Sensitive]` `Code`, `Error`). Built by the endpoint's callback, never sent by a client. |
 | [`IRefreshSessionCommand`](IRefreshSessionCommand.cs) | `ISessionResult` | Issues a new token while the session is valid. |
 | [`ILogoutSessionCommand`](ILogoutSessionCommand.cs) | (none) | Revokes the session. |
@@ -48,8 +48,8 @@ never send them.
 | [`ILogoutSessionOperationCommand`](Operations/ILogoutSessionOperationCommand.cs) | `ILogoutSessionCommand` | `ISessionOperationResult` (`Cleared`) |
 | [`IImpersonateOperationCommand`](Operations/IImpersonateOperationCommand.cs) | `IImpersonateCommand` (`ICommandAuthCritical`) | `ISessionOperationResult` |
 | [`IClearImpersonationOperationCommand`](Operations/IClearImpersonationOperationCommand.cs) | `IClearImpersonationCommand` | `ISessionOperationResult` |
-| [`IStartRemoteLoginOperationCommand`](Operations/IStartRemoteLoginOperationCommand.cs) | `IStartLoginCommand` (data), the callback URL and the correlation hash | `RedirectedUrl` |
-| [`ICompleteRemoteLoginOperationCommand`](Operations/ICompleteRemoteLoginOperationCommand.cs) | `IRemoteLoginCallbackCommand` (data), the presented correlation hash | `ISessionOperationResult` |
+| [`IStartRemoteLoginOperationCommand`](Operations/IStartRemoteLoginOperationCommand.cs) | `IStartLoginCommand` (data), the callback URL, the correlation hash and the presented session (the proof of the actor of a binding) | `RedirectedUrl` |
+| [`ICompleteRemoteLoginOperationCommand`](Operations/ICompleteRemoteLoginOperationCommand.cs) | `IRemoteLoginCallbackCommand` (data), the presented correlation hash | `ISessionOperationResult` (no issued session for a binding) |
 
 Two parts carry what the endpoint knows: [`ICommandPresentedSession`](Operations/ICommandPresentedSession.cs) (the key
 and the secret hashes of the presented session) and [`ICommandNextSessionSecrets`](Operations/ICommandNextSessionSecrets.cs)
