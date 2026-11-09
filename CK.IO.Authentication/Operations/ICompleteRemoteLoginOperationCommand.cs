@@ -17,5 +17,5 @@ public interface ICompleteRemoteLoginOperationCommand : ICommand<ISessionOperati
     /// <summary>
     /// Gets or sets the hash of the correlation secret presented by the caller.
     /// </summary>
-    string? PresentedCorrelationHash { get; set; }
+    byte[]? PresentedCorrelationHash { get; set; }
 }

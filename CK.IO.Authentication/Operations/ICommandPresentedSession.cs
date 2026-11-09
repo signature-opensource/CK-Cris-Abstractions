@@ -17,10 +17,10 @@ public interface ICommandPresentedSession : ICommandPart
     /// <summary>
     /// Gets or sets the hash of the presented refresh secret.
     /// </summary>
-    string? PresentedRefreshSecretHash { get; set; }
+    byte[]? PresentedRefreshSecretHash { get; set; }
 
     /// <summary>
     /// Gets or sets the hash of the presented binding secret.
     /// </summary>
-    string? PresentedBindingSecretHash { get; set; }
+    byte[]? PresentedBindingSecretHash { get; set; }
 }

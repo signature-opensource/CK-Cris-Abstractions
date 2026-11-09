@@ -26,7 +26,7 @@ public interface IStartRemoteLoginOperationCommand : ICommand<RedirectedUrl>, IC
     /// <summary>
     /// Gets or sets the hash of the correlation secret prepared by the endpoint (login CSRF protection).
     /// </summary>
-    string CorrelationHash { get; set; }
+    byte[] CorrelationHash { get; set; }
 
     /// <summary>
     /// Gets or sets the origin of the web page that sent the command, as checked by the endpoint. Null when the
