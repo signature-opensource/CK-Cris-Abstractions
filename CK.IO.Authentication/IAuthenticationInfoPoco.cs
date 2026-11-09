@@ -9,6 +9,11 @@ namespace CK.IO.Authentication;
 /// This is a description written by the server: it never becomes an <see cref="AuthenticationInfo"/>.
 /// A trusted authentication is only obtained by verifying a token.
 /// </para>
+/// <para>
+/// The one exception is the answer of an authentication center to the verification of a user's proof relayed by
+/// another party (CK.AppIdentity.AuthCenter): it is the center's own statement, received from it over an
+/// authenticated channel.
+/// </para>
 /// </summary>
 public interface IAuthenticationInfoPoco : IPoco
 {
