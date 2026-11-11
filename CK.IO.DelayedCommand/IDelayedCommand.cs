@@ -1,11 +1,16 @@
 using CK.Core;
+using CK.Auth;
 
 namespace CK.Cris;
 
 /// <summary>
-///  A command that delays the execution of another <see cref="Command"/>.
+/// A command that delays the execution of another <see cref="Command"/>.
+/// <para>
+/// It requires a <c>Normal</c> authentication (<see cref="ICommandAuthNormal"/>): a delayed command is stored until its
+/// execution date, an anonymous caller must not be able to fill the store.
+/// </para>
 /// </summary>
-public interface IDelayedCommand : ICommand
+public interface IDelayedCommand : ICommand, ICommandAuthNormal
 {
     /// <summary>
     /// Gets or sets the execution date of the <see cref="Command"/>.

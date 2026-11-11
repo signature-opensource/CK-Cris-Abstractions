@@ -8,7 +8,7 @@ One command that carries another one and a date. Two interfaces, no implementati
 ## A command as a property of a command.
 
 ```csharp
-public interface IDelayedCommand : ICommand
+public interface IDelayedCommand : ICommand, ICommandAuthNormal
 {
     DateTime ExecutionDate { get; set; }
     bool AllowPastExecutionDate { get; set; }
@@ -26,6 +26,13 @@ including another `IDelayedCommand`.
 That this works at all is the property of Cris that makes the package short: a command is a Poco whose
 properties describe its execution in totality, so it is complete and self-describing when its turn
 comes. There is no closure to serialize, no handler to name, no arguments to keep alongside.
+
+## Only an authenticated actor delays a command.
+
+`IDelayedCommand` is an `ICommandAuthNormal`: its `ActorId` must be the current actor, authenticated at the `Normal`
+level at least (checked by `CK.Cris.Authentication` when it is in the System). A delayed command is stored until its
+date: an anonymous caller would otherwise fill the store and lock every other one out. This is about the delayed command
+itself; the command it carries keeps its own authentication requirements, checked again when it executes.
 
 ## The two flags each mark a refusal.
 
@@ -86,3 +93,4 @@ rather than in a namespace of their own.
 
 - `CK.Cris`, for `ICommand`, `IEvent`, `IAbstractCommand`, `IEventSourceCommandPart`,
   `IPocoCommandExecutedPart` and `[LocalEvent]`.
+- `CK.IO.Auth`, for `ICommandAuthNormal`.

@@ -5,5 +5,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\CK.Cris\CK.Cris.csproj" />
+    <ProjectReference Include="..\CK.IO.Auth\CK.IO.Auth.csproj" />
   </ItemGroup>
 </Project>
