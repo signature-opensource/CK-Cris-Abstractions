@@ -4,5 +4,10 @@ The basic login of the CK.AuthenticationInfo model: [`IBasicLoginCommand`](IBasi
 name and a password (the "Basic" scheme). The password is `[Sensitive]`: it is never logged, and the command, an
 `ICommandAuthenticationSession`, is executed by its receiving endpoint only.
 
+[`IncomingValidators`](IncomingValidators.cs) bounds the credentials when the command enters the System: at most 256
+characters for the user name and 1024 for the password (`Authentication.UserNameTooLong`,
+`Authentication.PasswordTooLong`). The login is anonymous work that reaches the authentication center: it must not carry
+megabytes.
+
 The session lifetimes are the policy of the authentication center and cannot be chosen by the client. See
 [CK.IO.Authentication](../CK.IO.Authentication/README.md).
