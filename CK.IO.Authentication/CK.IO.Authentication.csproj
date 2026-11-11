@@ -6,6 +6,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\CK.IO.Auth\CK.IO.Auth.csproj" />
-    <PackageReference Include="CK.AuthenticationInfo" Version="15.0.0-0.cris-auth.1.ci.17" />
+    <PackageReference Include="CK.AuthenticationInfo" Version="15.0.0-0.cris-auth.1.ci.19" />
   </ItemGroup>
 </Project>
