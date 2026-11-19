@@ -14,4 +14,5 @@
   <Project Path="CK.IO.Authentication.Weak/CK.IO.Authentication.Weak.csproj" />
   <Project Path="CK.IO.Authentication.WeakZone/CK.IO.Authentication.WeakZone.csproj" />
   <Project Path="CK.IO.DelayedCommand/CK.IO.DelayedCommand.csproj" />
+  <Project Path="CK.IO.DynamicConfiguration/CK.IO.DynamicConfiguration.csproj" />
 </Solution>
