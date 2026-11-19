@@ -20,16 +20,17 @@ public interface IConfigurePropertyCommand : ICommand<ICrisBasicCommandResult>, 
     string PropertyPath { get; set; }
 
     /// <summary>
-    /// Gets or sets the new value: a basic value (a number, a boolean, a string, the name of an enum value, a duration as
-    /// a string "hh:mm:ss"...).
+    /// Gets or sets the new value, as a text (invariant culture, as in the configuration): a number ("4"), a boolean
+    /// ("true"), the name of an enum value, a duration ("00:00:05")... Null for a null value.
     /// </summary>
-    object? Value { get; set; }
+    string? Value { get; set; }
 
     /// <summary>
-    /// Gets or sets the value that the sender believes is the current one (the optimistic concurrency): when it differs,
-    /// the command fails and its message gives the actual value. It is always compared (null is a value).
+    /// Gets or sets the value that the sender believes is the current one, as a text (the optimistic concurrency: the
+    /// <see cref="IRunPropertyInfo.Value"/> it read). When it differs, the command fails and its message gives the actual
+    /// value. It is always compared (null is a value).
     /// </summary>
-    object? CurrentValue { get; set; }
+    string? CurrentValue { get; set; }
 }
 
 /// <summary>
